@@ -17,39 +17,35 @@
                 <h2 class="text-xl font-semibold mb-4">Filters</h2>
                 <!-- Dropdowns without separate labels -->
                 <div class="flex flex-col mb-4">
-                    <select class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-green-500 hover:bg-green-500 hover:text-white">
+                    <select class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-green-500 hover:bg-green-500 hover:text-white" [(ngModel)]="selectedMovie">
                         <option selected disabled>Choose a movie</option>
-                        <option>Movie 1</option>
-                        <option>Movie 2</option>
-                        <option>Movie 3</option>
-                        <!-- Add more options as needed -->
+                        <ng-container *ngFor="let movie of moviesList">
+                            <option [value]="movie?.title">{{ movie?.title }}</option>
+                        </ng-container>
                     </select>
                 </div>
                 <div class="flex flex-col mb-4">
-                    <select class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-green-500 hover:bg-green-500 hover:text-white">
+                    <select class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-green-500 hover:bg-green-500 hover:text-white" [(ngModel)]="selectedSpecies">
                         <option selected disabled>Choose a species</option>
-                        <option>Species 1</option>
-                        <option>Species 2</option>
-                        <option>Species 3</option>
-                        <!-- Add more options as needed -->
+                        <ng-container *ngFor="let specie of speciesList">
+                            <option [value]="specie?.name">{{ specie?.name }}</option>
+                        </ng-container>
                     </select>
                 </div>
                 <div class="flex flex-col mb-4">
                     <select class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-green-500 hover:bg-green-500 hover:text-white">
                         <option selected disabled>Choose a vehicle</option>
-                        <option>Vehicle 1</option>
-                        <option>Vehicle 2</option>
-                        <option>Vehicle 3</option>
-                        <!-- Add more options as needed -->
+                        <ng-container *ngFor="let vehicle of vehicleList">
+                            <option>{{ vehicle?.name }}</option>
+                        </ng-container>
                     </select>
                 </div>
                 <div class="flex flex-col mb-4">
                     <select class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-green-500 hover:bg-green-500 hover:text-white">
                         <option selected disabled>Choose a star ship</option>
-                        <option>Star Ship 1</option>
-                        <option>Star Ship 2</option>
-                        <option>Star Ship 3</option>
-                        <!-- Add more options as needed -->
+                        <ng-container *ngFor="let starship of starshipList">
+                            <option>{{ starship?.name }}</option>
+                        </ng-container>
                     </select>
                 </div>
                 <div class="flex flex-col mb-4">
@@ -60,6 +56,12 @@
                         <option>2000</option>
                         <!-- Add more options as needed -->
                     </select>
+                </div>
+                
+                <div class="flex justify-center">
+                    <button class="bg-white border border-green-500 text-green-500 px-4 py-2 rounded-sm hover:bg-green-500 hover:text-white hover:border-green-500 transition-colors duration-300 ease-in-out w-32" (click)="onSearch()">
+                        Search
+                    </button>
                 </div>
             </div>
 
@@ -77,37 +79,30 @@
                             </tr>
                         </thead>
                         <tbody class="h-full">
-                            <!-- Example Rows -->
-                            <tr class="bg-gray-100 hover:bg-gray-200 h-1/5">
-                                <td class="py-4 px-4 border-b border-gray-300">1</td>
-                                <td class="py-4 px-4 border-b border-gray-300">John Doe</td>
-                                <td class="py-4 px-4 border-b border-gray-300">Human</td>
-                                <td class="py-4 px-4 border-b border-gray-300">1990</td>
-                            </tr>
-                            <tr class="bg-gray-100 hover:bg-gray-200 h-1/5">
-                                <td class="py-4 px-4 border-b border-gray-300">2</td>
-                                <td class="py-4 px-4 border-b border-gray-300">Jane Smith</td>
-                                <td class="py-4 px-4 border-b border-gray-300">Human</td>
-                                <td class="py-4 px-4 border-b border-gray-300">1985</td>
-                            </tr>
-                            <tr class="bg-gray-100 hover:bg-gray-200 h-1/5">
-                                <td class="py-4 px-4 border-b border-gray-300">3</td>
-                                <td class="py-4 px-4 border-b border-gray-300">Luke Skywalker</td>
-                                <td class="py-4 px-4 border-b border-gray-300">Human</td>
-                                <td class="py-4 px-4 border-b border-gray-300">19BBY</td>
-                            </tr>
-                            <tr class="bg-gray-100 hover:bg-gray-200 h-1/5">
-                                <td class="py-4 px-4 border-b border-gray-300">4</td>
-                                <td class="py-4 px-4 border-b border-gray-300">Leia Organa</td>
-                                <td class="py-4 px-4 border-b border-gray-300">Human</td>
-                                <td class="py-4 px-4 border-b border-gray-300">19BBY</td>
-                            </tr>
-                            <tr class="bg-gray-100 hover:bg-gray-200 h-1/5">
-                                <td class="py-4 px-4 border-b border-gray-300">5</td>
-                                <td class="py-4 px-4 border-b border-gray-300">Han Solo</td>
-                                <td class="py-4 px-4 border-b border-gray-300">Human</td>
-                                <td class="py-4 px-4 border-b border-gray-300">29BBY</td>
-                            </tr>
+                            <ng-container *ngIf="peopleList.length > 0; else noData;">
+                                <ng-container *ngFor="let people of filteredPeopleList; let i = index">
+                                    <tr class="bg-gray-100 hover:bg-gray-200 h-1/5">
+                                        <td class="py-4 px-4 border-b border-gray-300">{{ i + 1 }}</td>
+                                        <td class="py-4 px-4 border-b border-gray-300">{{ people?.name }}</td>
+                                        <td class="py-4 px-4 border-b border-gray-300">
+                                            <ng-container *ngIf="people.speciesData && people.speciesData.length > 0">
+                                                <span *ngFor="let species of people.speciesData; let last = last">
+                                                    {{ species.name }}{{ !last ? ', ' : '' }}
+                                                </span>
+                                            </ng-container>
+                                            <ng-container *ngIf="!people.speciesData || people.speciesData.length === 0">
+                                                ---
+                                            </ng-container>
+                                        </td>
+                                        <td class="py-4 px-4 border-b border-gray-300">{{ people?.birth_year }}</td>
+                                    </tr>
+                                </ng-container>
+                            </ng-container>
+                            <ng-template #noData>
+                                <div>
+                                    There are no data!
+                                </div>
+                            </ng-template>
                         </tbody>
                     </table>
                 </div>
