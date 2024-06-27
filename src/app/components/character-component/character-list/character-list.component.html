@@ -1,1 +1,117 @@
+<div class="flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="bg-green-500 py-6 flex justify-between items-end">
+        <div class="container mx-auto">
+            <h1 class="text-white text-4xl font-bold">STAR WARS</h1>
+        </div>
+        <div class="text-white text-xs font-light mx-auto">
+            <p>THE SWAPI PROJECT</p>
+        </div>
+    </header>
 
+    <!-- Content -->
+    <main class="flex-grow bg-gray-100 py-8">
+        <div class="container mx-auto flex gap-4">
+            <!-- First Card: Filters -->
+            <div class="bg-white p-4 rounded shadow-md flex-grow">
+                <h2 class="text-xl font-semibold mb-4">Filters</h2>
+                <!-- Dropdowns without separate labels -->
+                <div class="flex flex-col mb-4">
+                    <select class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-green-500 hover:bg-green-500 hover:text-white">
+                        <option selected disabled>Choose a movie</option>
+                        <option>Movie 1</option>
+                        <option>Movie 2</option>
+                        <option>Movie 3</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <div class="flex flex-col mb-4">
+                    <select class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-green-500 hover:bg-green-500 hover:text-white">
+                        <option selected disabled>Choose a species</option>
+                        <option>Species 1</option>
+                        <option>Species 2</option>
+                        <option>Species 3</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <div class="flex flex-col mb-4">
+                    <select class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-green-500 hover:bg-green-500 hover:text-white">
+                        <option selected disabled>Choose a vehicle</option>
+                        <option>Vehicle 1</option>
+                        <option>Vehicle 2</option>
+                        <option>Vehicle 3</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <div class="flex flex-col mb-4">
+                    <select class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-green-500 hover:bg-green-500 hover:text-white">
+                        <option selected disabled>Choose a star ship</option>
+                        <option>Star Ship 1</option>
+                        <option>Star Ship 2</option>
+                        <option>Star Ship 3</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <div class="flex flex-col mb-4">
+                    <select class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-green-500 hover:bg-green-500 hover:text-white">
+                        <option selected disabled>Choose a birth year</option>
+                        <option>1990</option>
+                        <option>1995</option>
+                        <option>2000</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- Second Card: Table -->
+            <div class="bg-white p-4 rounded shadow-md w-3/4 flex flex-col">
+                <h2 class="text-xl font-semibold mb-4">SEARCH RESULTS</h2>
+                <div class="flex-grow overflow-y-auto">
+                    <table class="min-w-full bg-white h-full">
+                        <thead class="bg-gray-200">
+                            <tr>
+                                <th class="py-4 px-4 border-b border-gray-300 text-left">Serial Number</th>
+                                <th class="py-4 px-4 border-b border-gray-300 text-left">Name</th>
+                                <th class="py-4 px-4 border-b border-gray-300 text-left">Species</th>
+                                <th class="py-4 px-4 border-b border-gray-300 text-left">Birth Year</th>
+                            </tr>
+                        </thead>
+                        <tbody class="h-full">
+                            <!-- Example Rows -->
+                            <tr class="bg-gray-100 hover:bg-gray-200 h-1/5">
+                                <td class="py-4 px-4 border-b border-gray-300">1</td>
+                                <td class="py-4 px-4 border-b border-gray-300">John Doe</td>
+                                <td class="py-4 px-4 border-b border-gray-300">Human</td>
+                                <td class="py-4 px-4 border-b border-gray-300">1990</td>
+                            </tr>
+                            <tr class="bg-gray-100 hover:bg-gray-200 h-1/5">
+                                <td class="py-4 px-4 border-b border-gray-300">2</td>
+                                <td class="py-4 px-4 border-b border-gray-300">Jane Smith</td>
+                                <td class="py-4 px-4 border-b border-gray-300">Human</td>
+                                <td class="py-4 px-4 border-b border-gray-300">1985</td>
+                            </tr>
+                            <tr class="bg-gray-100 hover:bg-gray-200 h-1/5">
+                                <td class="py-4 px-4 border-b border-gray-300">3</td>
+                                <td class="py-4 px-4 border-b border-gray-300">Luke Skywalker</td>
+                                <td class="py-4 px-4 border-b border-gray-300">Human</td>
+                                <td class="py-4 px-4 border-b border-gray-300">19BBY</td>
+                            </tr>
+                            <tr class="bg-gray-100 hover:bg-gray-200 h-1/5">
+                                <td class="py-4 px-4 border-b border-gray-300">4</td>
+                                <td class="py-4 px-4 border-b border-gray-300">Leia Organa</td>
+                                <td class="py-4 px-4 border-b border-gray-300">Human</td>
+                                <td class="py-4 px-4 border-b border-gray-300">19BBY</td>
+                            </tr>
+                            <tr class="bg-gray-100 hover:bg-gray-200 h-1/5">
+                                <td class="py-4 px-4 border-b border-gray-300">5</td>
+                                <td class="py-4 px-4 border-b border-gray-300">Han Solo</td>
+                                <td class="py-4 px-4 border-b border-gray-300">Human</td>
+                                <td class="py-4 px-4 border-b border-gray-300">29BBY</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
