@@ -147,20 +147,21 @@
             </div>
 
             <!-- Second Card: Table -->
-            <div class="bg-white p-4 rounded shadow-md w-full sm:w-[55%] md:w-[65%] lg:w-[75%] flex flex-col overflow-x-auto">
-                <h2 class="text-lg font-semibold mb-4 text-[#239b73]">SEARCH RESULTS</h2>
+            <div class="bg-white p-4 rounded shadow-md w-full sm:w-[55%] md:w-[65%] lg:w-[75%] flex flex-col overflow-x-auto h-[550px]">
+                <h2 class="text-lg font-semibold text-[#239b73]">SEARCH RESULTS</h2>
+                <p class="text-xs text-slate-400 mb-4">(By Default this table will have all data)</p>
                 <div class="flex-grow overflow-y-auto">
-                    <table class="min-w-full bg-white h-full">
-                        <thead class="bg-gray-200">
-                            <tr>
-                                <th class="py-4 px-4 border-b border-gray-300 text-left">Serial Number</th>
-                                <th class="py-4 px-4 border-b border-gray-300 text-left">Name</th>
-                                <th class="py-4 px-4 border-b border-gray-300 text-left">Species</th>
-                                <th class="py-4 px-4 border-b border-gray-300 text-left">Birth Year</th>
-                            </tr>
-                        </thead>
-                        <tbody class="h-full">
-                            <ng-container *ngIf="peopleList.length > 0; else noData;">
+                    <ng-container *ngIf="filteredPeopleList.length > 0; else elseNoFilteredData;">
+                        <table class="min-w-full bg-white h-full">
+                            <thead class="bg-gray-200">
+                                <tr>
+                                    <th class="py-4 px-4 border-b border-gray-300 text-left">Serial Number</th>
+                                    <th class="py-4 px-4 border-b border-gray-300 text-left">Name</th>
+                                    <th class="py-4 px-4 border-b border-gray-300 text-left">Species</th>
+                                    <th class="py-4 px-4 border-b border-gray-300 text-left">Birth Year</th>
+                                </tr>
+                            </thead>
+                            <tbody class="h-full">
                                 <ng-container *ngFor="let people of filteredPeopleList; let i = index">
                                     <tr class="bg-gray-100 hover:bg-gray-200 h-1/5" >
                                         <td class="py-4 px-4 border-b border-gray-300">{{ i + 1 }}</td>
@@ -177,27 +178,34 @@
                                                 ---
                                             </ng-container>
                                         </td>
-                                        <td class="py-4 px-4 border-b border-gray-300">{{ people?.birth_year }}</td>
+                                        <td class="py-4 px-4 border-b border-gray-300">{{ people?.birth_year === 'unknown' ? '---' : people?.birth_year }}</td>
                                     </tr>
                                 </ng-container>
-                            </ng-container>
-                            <ng-template #noData>
-                                <div>
-                                    There are no data!
-                                </div>
-                            </ng-template>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </ng-container>
+                    <ng-template #elseNoFilteredData>
+                        <div class="flex justify-center items-center h-full">
+                            <div class="text-lg md:text-2xl font-semibold text-slate-400">
+                                We're sorry, but no data is available at this time.
+                            </div>
+                        </div>
+                    </ng-template>
                 </div>
 
-                <div class="mt-4 flex justify-end items-center space-x-2">
-                    <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md focus:outline-none"
-                            *ngFor="let page of getPagesArray(totalPages)"
-                            [class.bg-green-500]="currentPage === page"
-                            (click)="goToPage(page)">
-                      {{ page }}
-                    </button>
-                </div>
+                <!-- Pagination UI -->
+                <ng-container *ngIf="filteredPeopleList.length > 0">
+                    <ng-container *ngIf="isShowPaginationIcons">
+                        <div class="mt-4 flex justify-end items-center space-x-2">
+                            <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md focus:outline-none"
+                                    *ngFor="let page of getPagesArray(totalPages)"
+                                    [class.bg-green-500]="currentPage === page"
+                                    (click)="goToPage(page)">
+                              {{ page }}
+                            </button>
+                        </div>
+                    </ng-container>
+                </ng-container>
             </div>
         </div>
     </main>

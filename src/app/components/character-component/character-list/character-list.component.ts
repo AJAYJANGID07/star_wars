@@ -16,6 +16,7 @@ export class CharacterListComponent implements OnInit {
   vehicleList: any[] = [];
   starshipList: any[] = [];
   filteredPeopleList: any[] = [];
+  isShowPaginationIcons: boolean = true;
 
   // Pagination states
   currentPage: number = 1;
@@ -58,8 +59,8 @@ export class CharacterListComponent implements OnInit {
       );
       // Push the all fetched data into the peopleList
       this.peopleList.push(...newPeople);
+      this.isShowPaginationIcons = true;
       this.filteredPeopleList = res.results;
-      const pageCount = Math.ceil(res.count / res.results.length);
       this.totalPages = Math.ceil(res.count / 10);
       this._changeDetectorRef.markForCheck();
       this.fetchSpeciesData();
@@ -142,9 +143,10 @@ export class CharacterListComponent implements OnInit {
       this.selectedOptions.starship != null || 
       this.selectedOptions.vehicle != null) 
       {
+        this.isShowPaginationIcons = false;
         this.filteredPeopleList = this.peopleList;
       } else {
-        return;
+        return this.onGetPeopleList(this.currentPage);
       };
 
     // Filter for the movie
