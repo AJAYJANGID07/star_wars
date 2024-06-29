@@ -58,7 +58,7 @@ export class CharacterListComponent implements OnInit {
 
   // Fetch Peoples List
   onGetPeopleList(page: any) {
-    this._commonService.getPeoples(page).subscribe(res => {
+    this._commonService.getUser(page).subscribe(res => {
       // Check Duplicate user present or not if duplicate user come then auto remove from the list
       const newPeople = res.results.filter((newPerson: any) => 
         !this.peopleList.some((existingPerson: any) => existingPerson.url === newPerson.url)

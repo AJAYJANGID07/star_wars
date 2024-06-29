@@ -9,40 +9,47 @@ export class CommonService {
     private apiUrl = 'https://swapi.dev/api/';
 
     constructor(
-        private http: HttpClient,
+        private _httpClient: HttpClient,
     ) {}
 
-    getPeoples(page: number): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}/people?page=${page}`);
+    // Fetch user data api
+    getUser(page: number): Observable<any> {
+        return this._httpClient.get<any>(`${this.apiUrl}/people?page=${page}`);
     }
 
+    // Fetch movie data api
     fetchSpecies(speciesUrl: string): Observable<any> {
-        return this.http.get<any>(speciesUrl);
+        return this._httpClient.get<any>(speciesUrl);
     }
 
+    // Fetch movie data api
     getAllMovies(): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}/films`)
+        return this._httpClient.get<any>(`${this.apiUrl}/films`)
     }
 
+    // Fetch species data api
     getSpecies(): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}species`)
+        return this._httpClient.get<any>(`${this.apiUrl}species`)
     }
 
+    // Fetch vehicle data api
     getVehicleList(): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}/vehicles`)
+        return this._httpClient.get<any>(`${this.apiUrl}/vehicles`)
     }
 
+    // Fetch starship data api
     getStarshipsList(): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}starships`)
+        return this._httpClient.get<any>(`${this.apiUrl}starships`)
     }
 
+    // Fetch film data api
     fetchFilms(filmUrl: string): Observable<any> {
-        return this.http.get<any>(filmUrl);
+        return this._httpClient.get<any>(filmUrl);
     }
 
-    getPeopleByFilm(title: string): Observable<any> {
-        const params = new HttpParams().set('search', title);
-        return this.http.get<any>(`${this.apiUrl}/people/`, { params });
+    // Fetch people by id api
+    getUserById(id: string): Observable<any> {
+        return this._httpClient.get<any>(`${this.apiUrl}/people/${id}/`)
     }
 
 }
