@@ -1,18 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { CharaterComponentComponent } from './components/character-component/character-component.component';
-import { CharacterListComponent } from './components/character-component/character-list/character-list.component';
+import { CharacterListComponent } from './components/dashboard/user-list/user-list.component';
+import { CharacterDetailsComponent } from './components/dashboard/user-details/user-details.component';
 
 const routes: Routes = [
   {
-    path: '', 
-    component: CharacterListComponent, 
-    children: [
-      {
-        path: 'character-list', component: CharacterListComponent
-      },
-    ]
+    path: '',
+    component: CharacterListComponent
+  },
+  {
+    path: 'user-details/:id',
+    component: CharacterDetailsComponent
   },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

@@ -1,13 +1,14 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, catchError, forkJoin, map, of } from 'rxjs';
 import { CommonService } from 'src/app/services/common.service';
 
 type DropdownType = 'movie' | 'species' | 'starship' | 'vehicle';
 
 @Component({
-  selector: 'app-character-list',
-  templateUrl: './character-list.component.html',
-  styleUrls: ['./character-list.component.scss']
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.scss']
 })
 export class CharacterListComponent implements OnInit {
   peopleList: any[] = [];
@@ -38,15 +39,20 @@ export class CharacterListComponent implements OnInit {
 
   constructor(
     private _commonService: CommonService,
-    private _changeDetectorRef: ChangeDetectorRef
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _router: Router
     ) {}
 
   ngOnInit(): void {
     // Fetch Peoples List
     this.onGetPeopleList(this.currentPage);
+    // Get Movies list
     this.onGetMovies();
+    // Get Species list
     this.onGetSpeciesList();
+    // Get Vehicle list
     this.onGetVehicleList();
+    // Get Starship list
     this.onGetStarshipList();
   }
 
@@ -70,6 +76,7 @@ export class CharacterListComponent implements OnInit {
     })
   }
 
+  // Put species data into the people list to convert from url to actual data
   fetchSpeciesData(): void {
     const speciesObservables: Observable<any>[] = [];
     this.filteredPeopleList.forEach(person => {
@@ -178,6 +185,7 @@ export class CharacterListComponent implements OnInit {
     }
   }
 
+  // Toggle dropdown handler
   toggleDropdown(type: DropdownType) {
     const isCurrentlyOpen = this.dropdownStates[type];
     Object.keys(this.dropdownStates).forEach(key => {
@@ -186,11 +194,13 @@ export class CharacterListComponent implements OnInit {
     this.dropdownStates[type] = !isCurrentlyOpen;
   }
 
+  // Selected option value
   selectOption(type: DropdownType, option: any) {
     this.selectedOptions[type] = option;
     this._changeDetectorRef.detectChanges();
   }
 
+  // Go to another page
   goToPage(page: number): void {
     if (page < 1 || page > this.totalPages) {
       return;
@@ -199,6 +209,7 @@ export class CharacterListComponent implements OnInit {
     this.onGetPeopleList(this.currentPage);
   }
 
+  // Next Page Result
   nextPage(): void {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
@@ -206,6 +217,7 @@ export class CharacterListComponent implements OnInit {
     }
   }
 
+  // Prev Page Result
   prevPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -215,6 +227,13 @@ export class CharacterListComponent implements OnInit {
 
   getPagesArray(totalPages: number): number[] {
     return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  // Navigate into the details page
+  navigateIntoUserDetails(url: string) {
+    const match = url.match(/\/(\d+)\/$/);
+    const id = match ? match[1] : null;
+    this._router.navigate(['/user-details', id]);
   }
 
 }
