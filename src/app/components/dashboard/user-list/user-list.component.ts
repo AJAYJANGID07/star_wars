@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, forkJoin, map, of } from 'rxjs';
+import { FilteredUserList, Movie, Species, Starship, User, Vehicle } from 'src/app/interfaces/common.type';
 import { CommonService } from 'src/app/services/common.service';
 
 type DropdownType = 'movie' | 'species' | 'starship' | 'vehicle';
@@ -11,12 +12,12 @@ type DropdownType = 'movie' | 'species' | 'starship' | 'vehicle';
   styleUrls: ['./user-list.component.scss']
 })
 export class CharacterListComponent implements OnInit {
-  peopleList: any[] = [];
-  moviesList: any[] = [];
-  speciesList: any[] = [];
-  vehicleList: any[] = [];
-  starshipList: any[] = [];
-  filteredPeopleList: any[] = [];
+  peopleList: User[] = [];
+  moviesList: Movie[] = [];
+  speciesList: Species[] = [];
+  vehicleList: Vehicle[] = [];
+  starshipList: Starship[] = [];
+  filteredPeopleList: FilteredUserList[] = [];
   isShowPaginationIcons: boolean = true;
 
   // Pagination states
@@ -57,11 +58,11 @@ export class CharacterListComponent implements OnInit {
   }
 
   // Fetch Peoples List
-  onGetPeopleList(page: any) {
+  onGetPeopleList(page: number) {
     this._commonService.getUser(page).subscribe(res => {
       // Check Duplicate user present or not if duplicate user come then auto remove from the list
-      const newPeople = res.results.filter((newPerson: any) => 
-        !this.peopleList.some((existingPerson: any) => existingPerson.url === newPerson.url)
+      const newPeople = res.results.filter((newPerson: User) => 
+        !this.peopleList.some((existingPerson: User) => existingPerson.url === newPerson.url)
       );
       // Push the all fetched data into the peopleList
       this.peopleList.push(...newPeople);
@@ -85,7 +86,7 @@ export class CharacterListComponent implements OnInit {
       });
     });
     forkJoin(speciesObservables).subscribe(
-      (speciesData: any[]) => {
+      (speciesData: Species[]) => {
         let index = 0;
         this.filteredPeopleList.forEach(person => {
           person.speciesData = person.species.map(() => speciesData[index++]);
