@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from "rxjs";
-import { MovieList, SpeciesList, StarshipList, User, UserList, VehicleList } from "../interfaces/common.type";
+import { Observable, forkJoin } from "rxjs";
+import { MovieList, Planet, SpeciesList, StarshipList, User, UserList, VehicleList } from "../interfaces/common.type";
 
 @Injectable({
   providedIn: "root",
@@ -51,6 +51,36 @@ export class CommonService {
     // Fetch people by id api
     getUserById(id: string): Observable<User> {
         return this._httpClient.get<User>(`${this.apiUrl}/people/${id}/`)
+    }
+
+    // Get planet data api
+    getPlanetDetails(planetId: string): Observable<Planet> {
+        const planetUrl = `${this.apiUrl}/planets/${planetId}/`;
+        return this._httpClient.get<Planet>(planetUrl);
+    }
+
+    // Get species by url
+    getSpeciesByUrl(speciesUrls: string[]): Observable<any[]> {
+        const speciesRequests = speciesUrls.map(url => this._httpClient.get(url));
+        return forkJoin(speciesRequests);
+    }
+
+    // Get films by url
+    getFilmsByUrl(filmUrls: string[]): Observable<any[]> {
+        const filmRequests = filmUrls.map(url => this._httpClient.get(url));
+        return forkJoin(filmRequests);
+    }
+
+    // Get starship by url
+    getStarshipsByUrl(starshipUrls: string[]): Observable<any[]> {
+        const starshipRequests = starshipUrls.map(url => this._httpClient.get(url));
+        return forkJoin(starshipRequests);
+    }
+    
+    // Get vehicles by url
+    getVehiclesByUrl(vehicleUrls: string[]): Observable<any[]> {
+        const vehicleRequests = vehicleUrls.map(url => this._httpClient.get(url));
+        return forkJoin(vehicleRequests);
     }
 
 }
