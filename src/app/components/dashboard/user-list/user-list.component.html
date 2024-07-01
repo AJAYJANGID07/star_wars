@@ -121,13 +121,30 @@
 
                 <!-- Birth Year Dropdown -->
                 <div class="flex flex-col mb-4">
-                    <select class="border text-[#239b73] bg-[#e6e6e6] rounded px-4 py-2 focus:outline-none hover:text-[#239b73] font-semibold text-lg w-full lg:w-4/5 mx-auto" >
-                        <option selected disabled>Choose a birth year</option>
-                        <option>1990</option>
-                        <option>1995</option>
-                        <option>2000</option>
-                        <!-- Add more options as needed -->
-                    </select>
+                    <div class="dropdown" (click)="toggleDropdown('birthYear')">
+                        <div class="dropdown-selected" [ngStyle]="{
+                            'border-bottom-left-radius': dropdownStates.birthYear ? '0' : '6px',
+                            'background-color': dropdownStates.birthYear ? '#239b73' : '#e6e6e6',
+                            'color': dropdownStates.birthYear ? '#fff' : '#239b73',
+                            'border-bottom-right-radius': dropdownStates.birthYear ? '0' : '6px'
+                          }">
+                            {{ selectedOptions.birthYear ? selectedOptions.birthYear : 'Birth Year' }}
+                            <span [ngClass]="dropdownStates.birthYear ? 'dropdown-up-arrow' : 'dropdown-down-arrow'"></span>
+                        </div>
+                        <div class="dropdown-options" *ngIf="dropdownStates.birthYear">
+                            <div
+                                class="dropdown-option"
+                                (click)="selectOption('birthYear', null)">
+                                ALL
+                            </div>
+                            <div
+                                class="dropdown-option" 
+                                *ngFor="let birth of birthYearList" 
+                                (click)="selectOption('birthYear', birth)">
+                                {{ birth }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Search Button -->

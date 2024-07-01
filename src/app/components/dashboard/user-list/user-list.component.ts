@@ -4,7 +4,7 @@ import { Observable, catchError, forkJoin, map, of } from 'rxjs';
 import { FilteredUserList, Movie, Species, Starship, User, Vehicle } from 'src/app/interfaces/common.type';
 import { CommonService } from 'src/app/services/common.service';
 
-type DropdownType = 'movie' | 'species' | 'starship' | 'vehicle';
+type DropdownType = 'movie' | 'species' | 'starship' | 'vehicle' | 'birthYear';
 
 @Component({
   selector: 'app-user-list',
@@ -20,6 +20,18 @@ export class CharacterListComponent implements OnInit {
   filteredPeopleList: FilteredUserList[] = [];
   isShowPaginationIcons: boolean = true;
 
+  // Array of birth year
+  birthYearList = [
+    '19BBY',
+    '112BBY',
+    '33BBY',
+    '41.9BBY',
+    '52BBY',
+    '47BBY',
+    '24BBY',
+    '57BBY'
+  ]
+
   // Pagination states
   currentPage: number = 1;
   totalPages: number = 0;
@@ -28,14 +40,16 @@ export class CharacterListComponent implements OnInit {
     movie: false,
     species: false,
     starship: false,
-    vehicle: false
+    vehicle: false,
+    birthYear: false
   };
 
   selectedOptions: Record<DropdownType, any> = {
     movie: null,
     species: null,
     starship: null,
-    vehicle: null
+    vehicle: null,
+    birthYear: null
   };
 
   constructor(
@@ -149,7 +163,8 @@ export class CharacterListComponent implements OnInit {
       this.selectedOptions.movie != null || 
       this.selectedOptions.species != null || 
       this.selectedOptions.starship != null || 
-      this.selectedOptions.vehicle != null) 
+      this.selectedOptions.vehicle != null ||
+      this.selectedOptions.birthYear != null)
       {
         this.isShowPaginationIcons = false;
         this.filteredPeopleList = this.peopleList;
@@ -182,6 +197,13 @@ export class CharacterListComponent implements OnInit {
     if(this.selectedOptions.starship != null) {
       this.filteredPeopleList = this.filteredPeopleList.filter(person =>
         person.starships.includes(this.selectedOptions.starship.url)
+      );
+    }
+
+    // Filter fot birth year
+    if(this.selectedOptions.birthYear != null) {
+      this.filteredPeopleList = this.filteredPeopleList.filter(person =>
+        person.birth_year === this.selectedOptions.birthYear
       );
     }
   }
