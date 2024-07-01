@@ -197,11 +197,13 @@
                         </table>
                     </ng-container>
                     <ng-template #elseNoFilteredData>
-                        <div class="flex justify-center items-center h-full">
-                            <div class="text-lg md:text-2xl font-semibold text-slate-400">
-                                We're sorry, but no data is available at this time.
+                        <ng-container *ngIf="!isLoading">
+                            <div class="flex justify-center items-center h-full">
+                                <div class="text-lg md:text-2xl font-semibold text-slate-400">
+                                    We're sorry, but no data is available at this time.
+                                </div>
                             </div>
-                        </div>
+                        </ng-container>
                     </ng-template>
                 </div>
 
@@ -221,4 +223,5 @@
             </div>
         </div>
     </main>
+    <ngx-loading [show]="isLoading"></ngx-loading>
 </div>

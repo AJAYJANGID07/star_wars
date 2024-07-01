@@ -19,6 +19,7 @@ export class CharacterListComponent implements OnInit {
   starshipList: Starship[] = [];
   filteredPeopleList: FilteredUserList[] = [];
   isShowPaginationIcons: boolean = true;
+  isLoading: boolean = false;
 
   // Array of birth year
   birthYearList = [
@@ -73,6 +74,7 @@ export class CharacterListComponent implements OnInit {
 
   // Fetch Peoples List
   onGetPeopleList(page: number) {
+    this.isLoading = true;
     this._commonService.getUser(page).subscribe(res => {
       // Check Duplicate user present or not if duplicate user come then auto remove from the list
       const newPeople = res.results.filter((newPerson: User) => 
@@ -83,9 +85,11 @@ export class CharacterListComponent implements OnInit {
       this.isShowPaginationIcons = true;
       this.filteredPeopleList = res.results;
       this.totalPages = Math.ceil(res.count / 10);
-      this._changeDetectorRef.markForCheck();
       this.fetchSpeciesData();
+      this.isLoading = false;
+      this._changeDetectorRef.markForCheck();
     },(error: any) => {
+      this.isLoading = false;
       console.log(error);
       this._changeDetectorRef.markForCheck();
     })

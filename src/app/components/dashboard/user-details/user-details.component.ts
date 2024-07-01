@@ -11,6 +11,7 @@ import { CommonService } from 'src/app/services/common.service';
 export class CharacterDetailsComponent implements OnInit {
   id: string = '';
   user!: EditedUser;
+  isLoading: boolean = false;
   constructor(
     private _commonService: CommonService,
     private _changeDetectorRef: ChangeDetectorRef,
@@ -29,6 +30,7 @@ export class CharacterDetailsComponent implements OnInit {
 
   // Get user by id
   onGetUserById(id: string) {
+    this.isLoading = true;
     this._commonService.getUserById(id).subscribe(res => {
       this.user = res;
       const match = res.homeworld.match(/\/(\d+)\/$/);
@@ -38,9 +40,10 @@ export class CharacterDetailsComponent implements OnInit {
       this.onGetFilmsByUrl(res?.films);
       this.onGetVehiclesByUrl(res?.vehicles);
       this.onGetStarshipByUrl(res?.starships);
+      this.isLoading = false;
       this._changeDetectorRef.markForCheck();
     },(errorRes) => {
-      console.log(errorRes);
+      this.isLoading = false;
       this._changeDetectorRef.markForCheck();
     })
   }
@@ -51,6 +54,7 @@ export class CharacterDetailsComponent implements OnInit {
       this.user.homeworldDetails = homeworldData;
       this._changeDetectorRef.markForCheck();
     },(errorRes) => {
+      this.isLoading = false;
       console.log(errorRes);
       this._changeDetectorRef.markForCheck();
     });
@@ -62,6 +66,7 @@ export class CharacterDetailsComponent implements OnInit {
       this.user.speciesDetails = speciesData;
       this._changeDetectorRef.markForCheck();
     },(errorRes) => {
+      this.isLoading = false;
       console.log(errorRes);
       this._changeDetectorRef.markForCheck();
     });
@@ -75,6 +80,7 @@ export class CharacterDetailsComponent implements OnInit {
         this._changeDetectorRef.markForCheck();
       },
       (error) => {
+        this.isLoading = false;
         console.error(error);
         this._changeDetectorRef.markForCheck();
       }
@@ -89,6 +95,7 @@ export class CharacterDetailsComponent implements OnInit {
         this._changeDetectorRef.markForCheck();
       },
       (error) => {
+        this.isLoading = false;
         console.error(error);
         this._changeDetectorRef.markForCheck();
       }
@@ -103,6 +110,7 @@ export class CharacterDetailsComponent implements OnInit {
         this._changeDetectorRef.markForCheck();
       },
       (error) => {
+        this.isLoading = false;
         console.error(error);
         this._changeDetectorRef.markForCheck();
       }

@@ -5,128 +5,133 @@
     <main class="flex-grow bg-gray-100 py-8 px-4 sm:px-4 md:px-4 lg:px-0">
         <div class="container mx-auto flex flex-wrap sm:flex-nowrap gap-4">
             <!-- First Card: User Details -->
-            <div class="bg-white p-4 rounded shadow-md w-full sm:w-[45%] md:w-[35%] lg:w-[25%] flex-grow">
-                <div class="flex justify-center py-4">
-                    <img src="/assets/global.png" alt="Global Image" class="block mx-auto" style="width: 100px; height: auto;"/>
-                </div>
-                <div class="">
-                    <!-- User Name -->
-                    <div>
-                        <span class="text-sm font-semibold text-slate-400">Name: </span>
-                        <span class="text-sm font-semibold text-slate-400">{{user?.name}}</span>
+            <ng-container *ngIf="!isLoading">
+                <div class="bg-white p-4 rounded shadow-md w-full sm:w-[45%] md:w-[35%] lg:w-[25%] flex-grow">
+                    <div class="flex justify-center py-4">
+                        <img src="/assets/global.png" alt="Global Image" class="block mx-auto" style="width: 100px; height: auto;"/>
                     </div>
-                    <!-- User Birth Year -->
-                    <div>
-                        <span class="text-sm text-slate-400">Born: </span>
-                        <span class="text-sm text-slate-400">{{user?.birth_year}}</span>
-                    </div>
-                    <!-- Gender -->
-                    <div>
-                        <span class="text-sm text-slate-400">Gender: </span>
-                        <span class="text-sm text-slate-400">{{user?.gender | titlecase}}</span>
-                    </div>
-                    <!-- Height -->
-                    <div>
-                        <span class="text-sm text-slate-400">Height: </span>
-                        <span class="text-sm text-slate-400">{{user?.height}}</span>
-                    </div>
-                    <!-- Weight -->
-                    <div>
-                        <span class="text-sm text-slate-400">Weight: </span>
-                        <span class="text-sm text-slate-400">{{user?.mass}}</span>
-                    </div>
-                    <!-- Create at -->
-                    <div>
-                        <span class="text-sm text-slate-400">Created at: </span>
-                        <span class="text-sm text-slate-400">{{user?.created | date:'dd/MM/yyyy hh:mm a'}}</span>
-                    </div>
-                    <!-- Edited at -->
-                    <div>
-                        <span class="text-sm text-slate-400">Edited at: </span>
-                        <span class="text-sm text-slate-400">{{user?.edited | date:'dd/MM/yyyy hh:mm a'}}</span>
-                    </div>
-                    <!-- Hair color -->
-                    <div>
-                        <span class="text-sm text-slate-400">Hair color: </span>
-                        <span class="text-sm text-slate-400">{{user?.hair_color | titlecase}}</span>
-                    </div>
-                    <!-- Eye color -->
-                    <div>
-                        <span class="text-sm text-slate-400">Eye color: </span>
-                        <span class="text-sm text-slate-400">{{user?.eye_color | titlecase}}</span>
-                    </div>
-                    <!-- Skin color -->
-                    <div>
-                        <span class="text-sm text-slate-400">Skin color: </span>
-                        <span class="text-sm text-slate-400">{{user?.skin_color | titlecase}}</span>
-                    </div>
-                    <!-- Panet Name -->
-                    <ng-container *ngIf="user.homeworld">
-                        <div class="mt-2">
-                            <span class="text-sm font-semibold text-slate-400">Planet Name: </span>
-                            <span class="text-sm font-semibold text-slate-400">{{user?.homeworldDetails?.name}}</span>
+                    <div class="">
+                        <!-- User Name -->
+                        <div>
+                            <span class="text-sm font-semibold text-slate-400">Name: </span>
+                            <span class="text-sm font-semibold text-slate-400">{{user?.name}}</span>
                         </div>
-                    </ng-container>
-                    <ng-container *ngIf="user.species.length > 0">
-                        <div class="mt-2">
-                            <span class="text-sm font-semibold text-slate-400">Species: </span>
-                            <span class="text-sm font-semibold text-slate-400" *ngFor="let species of user.speciesDetails">{{species.name}}</span>
+                        <!-- User Birth Year -->
+                        <div>
+                            <span class="text-sm text-slate-400">Born: </span>
+                            <span class="text-sm text-slate-400">{{user?.birth_year}}</span>
                         </div>
-                    </ng-container>
+                        <!-- Gender -->
+                        <div>
+                            <span class="text-sm text-slate-400">Gender: </span>
+                            <span class="text-sm text-slate-400">{{user?.gender | titlecase}}</span>
+                        </div>
+                        <!-- Height -->
+                        <div>
+                            <span class="text-sm text-slate-400">Height: </span>
+                            <span class="text-sm text-slate-400">{{user?.height}}</span>
+                        </div>
+                        <!-- Weight -->
+                        <div>
+                            <span class="text-sm text-slate-400">Weight: </span>
+                            <span class="text-sm text-slate-400">{{user?.mass}}</span>
+                        </div>
+                        <!-- Create at -->
+                        <div>
+                            <span class="text-sm text-slate-400">Created at: </span>
+                            <span class="text-sm text-slate-400">{{user?.created | date:'dd/MM/yyyy hh:mm a'}}</span>
+                        </div>
+                        <!-- Edited at -->
+                        <div>
+                            <span class="text-sm text-slate-400">Edited at: </span>
+                            <span class="text-sm text-slate-400">{{user?.edited | date:'dd/MM/yyyy hh:mm a'}}</span>
+                        </div>
+                        <!-- Hair color -->
+                        <div>
+                            <span class="text-sm text-slate-400">Hair color: </span>
+                            <span class="text-sm text-slate-400">{{user?.hair_color | titlecase}}</span>
+                        </div>
+                        <!-- Eye color -->
+                        <div>
+                            <span class="text-sm text-slate-400">Eye color: </span>
+                            <span class="text-sm text-slate-400">{{user?.eye_color | titlecase}}</span>
+                        </div>
+                        <!-- Skin color -->
+                        <div>
+                            <span class="text-sm text-slate-400">Skin color: </span>
+                            <span class="text-sm text-slate-400">{{user?.skin_color | titlecase}}</span>
+                        </div>
+                        <!-- Panet Name -->
+                        <ng-container *ngIf="user?.homeworld">
+                            <div class="mt-2">
+                                <span class="text-sm font-semibold text-slate-400">Planet Name: </span>
+                                <span class="text-sm font-semibold text-slate-400">{{user?.homeworldDetails?.name}}</span>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="user.species.length > 0">
+                            <div class="mt-2">
+                                <span class="text-sm font-semibold text-slate-400">Species: </span>
+                                <span class="text-sm font-semibold text-slate-400" *ngFor="let species of user?.speciesDetails">{{species?.name}}</span>
+                            </div>
+                        </ng-container>
+                    </div>
                 </div>
-            </div>
+            </ng-container>
 
             <!-- Second Card: Users Details - Films, Starships, Species, Vehicles -->
-            <div class="bg-white p-6 m-2 rounded shadow-md w-full sm:w-[55%] md:w-[65%] lg:w-[75%] flex flex-col overflow-x-auto h-[550px]">
-                <!-- Films -->
-                <div class="">
-                    <h2 class="text-lg font-semibold text-[#239b73]">FILMS</h2>
-                    <ng-container *ngFor="let film of user?.filmsData">
-                        <div class="py-4 bg-gray-100 my-2 rounded-md">
-                            <div class="mx-4">
-                                <div class="text-sm text-slate-400">
-                                    Name: {{film?.title}}
-                                </div>
-                                <div class="text-sm text-slate-400">
-                                    Director: {{film?.director}}
-                                </div>
-                                <div class="text-sm text-slate-400">
-                                    Producer: {{film.producer}}
+            <ng-container *ngIf="!isLoading">
+                <div class="bg-white p-6 m-2 rounded shadow-md w-full sm:w-[55%] md:w-[65%] lg:w-[75%] flex flex-col overflow-x-auto h-[550px]">
+                    <!-- Films -->
+                    <div class="">
+                        <h2 class="text-lg font-semibold text-[#239b73]">FILMS</h2>
+                        <ng-container *ngFor="let film of user?.filmsData">
+                            <div class="py-4 bg-gray-100 my-2 rounded-md">
+                                <div class="mx-4">
+                                    <div class="text-sm text-slate-400">
+                                        Name: {{film?.title}}
+                                    </div>
+                                    <div class="text-sm text-slate-400">
+                                        Director: {{film?.director}}
+                                    </div>
+                                    <div class="text-sm text-slate-400">
+                                        Producer: {{film.producer}}
+                                    </div>
                                 </div>
                             </div>
+                        </ng-container>
+                    </div>
+    
+                    <!-- Vehicles -->
+                    <div class="">
+                        <h2 class="text-lg font-semibold text-[#239b73]">VEHICLES</h2>
+                        <div class="py-4 bg-gray-100 my-2 rounded-md">
+                            <div class="mx-4">
+                                <ng-container *ngFor="let vehicle of user?.vehicleDetails; let i = index;">
+                                    <div class="text-sm text-slate-400">
+                                        Vehicle {{ i + 1 }}: {{vehicle?.name}}
+                                    </div>
+                                </ng-container>
+                            </div>
                         </div>
-                    </ng-container>
-                </div>
-
-                <!-- Vehicles -->
-                <div class="">
-                    <h2 class="text-lg font-semibold text-[#239b73]">VEHICLES</h2>
-                    <div class="py-4 bg-gray-100 my-2 rounded-md">
-                        <div class="mx-4">
-                            <ng-container *ngFor="let vehicle of user?.vehicleDetails; let i = index;">
-                                <div class="text-sm text-slate-400">
-                                    Vehicle {{ i + 1 }}: {{vehicle?.name}}
-                                </div>
-                            </ng-container>
+                    </div>
+    
+                    <!-- Starships -->
+                    <div class="">
+                        <h2 class="text-lg font-semibold text-[#239b73]">STARSHIPS</h2>
+                        <div class="py-4 bg-gray-100 my-2 rounded-md">
+                            <div class="mx-4">
+                                <ng-container *ngFor="let starship of user?.starshipDetails; let i = index;">
+                                    <div class="text-sm text-slate-400">
+                                        Starship {{ i + 1 }}: {{starship?.name}}
+                                    </div>
+                                </ng-container>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Starships -->
-                <div class="">
-                    <h2 class="text-lg font-semibold text-[#239b73]">STARSHIPS</h2>
-                    <div class="py-4 bg-gray-100 my-2 rounded-md">
-                        <div class="mx-4">
-                            <ng-container *ngFor="let starship of user?.starshipDetails; let i = index;">
-                                <div class="text-sm text-slate-400">
-                                    Starship {{ i + 1 }}: {{starship?.name}}
-                                </div>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </ng-container>
         </div>
     </main>
+    <ngx-loading [show]="isLoading"></ngx-loading>
 </div>
 

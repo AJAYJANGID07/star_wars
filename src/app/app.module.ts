@@ -9,6 +9,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CharacterDetailsComponent } from './components/dashboard/user-details/user-details.component';
 import { CustomHeaderComponent } from './shared/custom-header/custom-header.component';
+import { NgxLoadingModule } from "ngx-loading";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CustomHeaderComponent } from './shared/custom-header/custom-header.comp
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxLoadingModule.forRoot({}),
   ],
   providers: [
   ],

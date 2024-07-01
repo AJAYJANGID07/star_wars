@@ -9,6 +9,7 @@ import { MovieList, Planet, SpeciesList, StarshipList, User, UserList, VehicleLi
 export class CommonService {
     private apiUrl = 'https://swapi.dev/api/';
 
+    // Constructor
     constructor(
         private _httpClient: HttpClient,
     ) {}
