@@ -1,1 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.dropdown-selected {
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e6e6e6;
+  border-radius: 6px;
+  color: #239b73;
+  font-weight: 500;
+}
+
+.dropdown-up-arrow {
+  margin-left: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(225deg);
+  font-weight: 500;
+}
+
+.dropdown-down-arrow {
+  margin-left: 10px;
+  border: solid #239b73;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  font-weight: 500;
+}
+
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  background-color: #e6e6e6;
+  z-index: 1;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.dropdown-option {
+  padding: 10px;
+  margin: 5px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.dropdown-option:hover {
+  background-color: #239b73;
+  color: #fff;
+}

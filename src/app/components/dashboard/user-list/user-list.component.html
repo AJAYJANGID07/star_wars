@@ -1,0 +1,227 @@
+<div class="flex flex-col min-h-screen">
+    <app-custom-header></app-custom-header>
+
+    <!-- Content -->
+    <main class="flex-grow bg-gray-100 py-8 px-4 sm:px-4 md:px-4 lg:px-0">
+        <div class="container mx-auto flex flex-wrap sm:flex-nowrap gap-4">
+            <!-- First Card: Filters -->
+            <div class="bg-white p-4 rounded shadow-md w-full sm:w-[45%] md:w-[35%] lg:w-[25%] flex-grow">
+                <h2 class="text-lg font-semibold mb-4 text-[#239b73] text-left lg:text-center">Filters</h2>
+                <!-- Movies Dropdown -->
+                <div class="flex flex-col mb-4">
+                    <div class="dropdown" (click)="toggleDropdown('movie')">
+                        <div class="dropdown-selected" [ngStyle]="{
+                            'border-bottom-left-radius': dropdownStates.movie ? '0' : '6px',
+                            'background-color': dropdownStates.movie ? '#239b73' : '#e6e6e6',
+                            'color': dropdownStates.movie ? '#fff' : '#239b73',
+                            'border-bottom-right-radius': dropdownStates.movie ? '0' : '6px'
+                          }">
+                            {{ selectedOptions.movie ? selectedOptions.movie.title : 'Movies' }}
+                          <span [ngClass]="dropdownStates.movie ? 'dropdown-up-arrow' : 'dropdown-down-arrow'"></span>
+                        </div>
+                        <div class="dropdown-options" *ngIf="dropdownStates.movie">
+                            <div
+                                class="dropdown-option"
+                                (click)="selectOption('movie', null)">
+                                ALL
+                            </div>
+                            <div
+                                class="dropdown-option" 
+                                *ngFor="let movie of moviesList"
+                                (click)="selectOption('movie', movie)">
+                                {{ movie?.title }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Species Dropdown -->
+                <div class="flex flex-col mb-4">
+                    <div class="dropdown" (click)="toggleDropdown('species')">
+                        <div class="dropdown-selected" [ngStyle]="{
+                            'border-bottom-left-radius': dropdownStates.species ? '0' : '6px',
+                            'background-color': dropdownStates.species ? '#239b73' : '#e6e6e6',
+                            'color': dropdownStates.species ? '#fff' : '#239b73',
+                            'border-bottom-right-radius': dropdownStates.species ? '0' : '6px'
+                          }">
+                            {{ selectedOptions.species ? selectedOptions.species.name : 'Species' }}
+                          <span [ngClass]="dropdownStates.species ? 'dropdown-up-arrow' : 'dropdown-down-arrow'"></span>
+                        </div>
+                        <div class="dropdown-options" *ngIf="dropdownStates.species">
+                            <div
+                                class="dropdown-option"
+                                (click)="selectOption('species', null)">
+                                ALL
+                            </div>
+                            <div
+                                class="dropdown-option" 
+                                *ngFor="let specie of speciesList"
+                                (click)="selectOption('species', specie)">
+                                {{ specie?.name }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vehicle Dropdown -->
+                <div class="flex flex-col mb-4">
+                    <div class="dropdown" (click)="toggleDropdown('vehicle')">
+                        <div class="dropdown-selected" [ngStyle]="{
+                            'border-bottom-left-radius': dropdownStates.vehicle ? '0' : '6px',
+                            'background-color': dropdownStates.vehicle ? '#239b73' : '#e6e6e6',
+                            'color': dropdownStates.vehicle ? '#fff' : '#239b73',
+                            'border-bottom-right-radius': dropdownStates.vehicle ? '0' : '6px'
+                          }">
+                            {{ selectedOptions.vehicle ? selectedOptions.vehicle.name : 'Vehicle' }}
+                            <span [ngClass]="dropdownStates.vehicle ? 'dropdown-up-arrow' : 'dropdown-down-arrow'"></span>
+                        </div>
+                        <div class="dropdown-options" *ngIf="dropdownStates.vehicle">
+                            <div
+                                class="dropdown-option"
+                                (click)="selectOption('vehicle', null)">
+                                ALL
+                            </div>
+                            <div
+                                class="dropdown-option" 
+                                *ngFor="let vehicle of vehicleList" 
+                                (click)="selectOption('vehicle', vehicle)">
+                                {{ vehicle?.name }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Starship dropdown -->
+                <div class="flex flex-col mb-4">
+                    <div class="dropdown" (click)="toggleDropdown('starship')">
+                        <div class="dropdown-selected" [ngStyle]="{
+                            'border-bottom-left-radius': dropdownStates.starship ? '0' : '6px',
+                            'background-color': dropdownStates.starship ? '#239b73' : '#e6e6e6',
+                            'color': dropdownStates.starship ? '#fff' : '#239b73',
+                            'border-bottom-right-radius': dropdownStates.starship ? '0' : '6px'
+                          }">
+                            {{ selectedOptions.starship ? selectedOptions.starship.name : 'Starship' }}
+                            <span [ngClass]="dropdownStates.starship ? 'dropdown-up-arrow' : 'dropdown-down-arrow'"></span>
+                        </div>
+                        <div class="dropdown-options" *ngIf="dropdownStates.starship">
+                            <div
+                                class="dropdown-option"
+                                (click)="selectOption('starship', null)">
+                                ALL
+                            </div>
+                            <div
+                                class="dropdown-option" 
+                                *ngFor="let starship of starshipList" 
+                                (click)="selectOption('starship', starship)">
+                                {{ starship?.name }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Birth Year Dropdown -->
+                <div class="flex flex-col mb-4">
+                    <div class="dropdown" (click)="toggleDropdown('birthYear')">
+                        <div class="dropdown-selected" [ngStyle]="{
+                            'border-bottom-left-radius': dropdownStates.birthYear ? '0' : '6px',
+                            'background-color': dropdownStates.birthYear ? '#239b73' : '#e6e6e6',
+                            'color': dropdownStates.birthYear ? '#fff' : '#239b73',
+                            'border-bottom-right-radius': dropdownStates.birthYear ? '0' : '6px'
+                          }">
+                            {{ selectedOptions.birthYear ? selectedOptions.birthYear : 'Birth Year' }}
+                            <span [ngClass]="dropdownStates.birthYear ? 'dropdown-up-arrow' : 'dropdown-down-arrow'"></span>
+                        </div>
+                        <div class="dropdown-options" *ngIf="dropdownStates.birthYear">
+                            <div
+                                class="dropdown-option"
+                                (click)="selectOption('birthYear', null)">
+                                ALL
+                            </div>
+                            <div
+                                class="dropdown-option" 
+                                *ngFor="let birth of birthYearList" 
+                                (click)="selectOption('birthYear', birth)">
+                                {{ birth }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Search Button -->
+                <div class="flex justify-center">
+                    <button class="bg-white border border-[#239b73] text-[#239b73] px-4 py-2 font-semibold text-md rounded-sm hover:bg-[#239b73] hover:text-white hover:border-[#239b73] transition-colors duration-300 ease-in-out w-32" (click)="onSearch()">
+                        Search
+                    </button>
+                </div>
+            </div>
+
+            <!-- Second Card: Table -->
+            <div class="bg-white p-4 rounded shadow-md w-full sm:w-[55%] md:w-[65%] lg:w-[75%] flex flex-col overflow-x-auto h-[550px]">
+                <h2 class="text-lg font-semibold text-[#239b73]">SEARCH RESULTS</h2>
+                <p class="text-xs text-slate-400 mb-4">(By Default this table will have all data)</p>
+                <div class="flex-grow overflow-y-auto">
+                    <ng-container *ngIf="filteredPeopleList.length > 0; else elseNoFilteredData;">
+                        <table class="min-w-full bg-white h-full">
+                            <thead class="bg-gray-200">
+                                <tr>
+                                    <th class="py-4 px-4 border-b border-gray-300 text-left">Serial Number</th>
+                                    <th class="py-4 px-4 border-b border-gray-300 text-left">Name</th>
+                                    <th class="py-4 px-4 border-b border-gray-300 text-left">Species</th>
+                                    <th class="py-4 px-4 border-b border-gray-300 text-left">Birth Year</th>
+                                </tr>
+                            </thead>
+                            <tbody class="h-full">
+                                <ng-container *ngFor="let people of filteredPeopleList; let i = index">
+                                    <tr class="bg-gray-100 hover:bg-gray-200 h-1/5" >
+                                        <td class="py-4 px-4 border-b border-gray-300">{{ i + 1 }}</td>
+                                        <td class="py-4 px-4 border-b border-gray-300 cursor-pointer">
+                                            <span (click)="navigateIntoUserDetails(people.url)">
+                                                {{ people?.name }}
+                                            </span>
+                                            <!-- <a [routerLink]="['/user-details', people?.url]"></a> -->
+                                        </td>
+                                        <td class="py-4 px-4 border-b border-gray-300">
+                                            <ng-container *ngIf="people.speciesData && people.speciesData.length > 0">
+                                                <span *ngFor="let species of people.speciesData; let last = last">
+                                                    {{ species.name }}{{ !last ? ', ' : '' }}
+                                                </span>
+                                            </ng-container>
+                                            <ng-container *ngIf="!people.speciesData || people.speciesData.length === 0">
+                                                ---
+                                            </ng-container>
+                                        </td>
+                                        <td class="py-4 px-4 border-b border-gray-300">{{ people?.birth_year === 'unknown' ? '---' : people?.birth_year }}</td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </ng-container>
+                    <ng-template #elseNoFilteredData>
+                        <ng-container *ngIf="!isLoading">
+                            <div class="flex justify-center items-center h-full">
+                                <div class="text-lg md:text-2xl font-semibold text-slate-400">
+                                    We're sorry, but no data is available at this time.
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-template>
+                </div>
+
+                <!-- Pagination UI -->
+                <ng-container *ngIf="filteredPeopleList.length > 0">
+                    <ng-container *ngIf="isShowPaginationIcons">
+                        <div class="mt-4 flex justify-end items-center space-x-2">
+                            <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md focus:outline-none"
+                                    *ngFor="let page of getPagesArray(totalPages)"
+                                    [class.bg-green-500]="currentPage === page"
+                                    (click)="goToPage(page)">
+                              {{ page }}
+                            </button>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </main>
+    <ngx-loading [show]="isLoading"></ngx-loading>
+</div>
